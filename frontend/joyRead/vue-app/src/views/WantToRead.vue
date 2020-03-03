@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div>Welcome to homepage of Joy Read!</div>
-    <el-button type='primary'>test button</el-button>
-    <FooterBar></FooterBar>
+    <div>Welcome to WantToRead page of Joy Read!</div>
+        <FooterBar></FooterBar>
   </div>
   
 </template>
@@ -10,7 +9,7 @@
 <script>
 import FooterBar from "../components/FooterBar"
 export default {
-  name: 'Homepage',
+  name: 'WantToRead',
   components: {
         FooterBar,
     },
