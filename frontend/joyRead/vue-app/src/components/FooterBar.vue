@@ -43,7 +43,6 @@
     width: 100%;
     bottom:0px;
     border-top:1px solid #d2d2d2;
-    background-color: #f2f2f2;
     text-align: center;
   }
 
