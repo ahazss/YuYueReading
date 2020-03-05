@@ -39,8 +39,12 @@
 </template>
 
 <script>
+import FooterBar from "../components/FooterBar"
 export default {
   name: 'Homepage',
+  components: {
+        FooterBar,
+    },
   data () {
     return {
       nowDate:"",
