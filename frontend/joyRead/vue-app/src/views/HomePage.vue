@@ -30,11 +30,11 @@
     <div id="box_list">
       
       <el-button :span=14   id="list_name">茅盾文学奖获奖书单</el-button>
-      <el-button :span=14 style="margin-left:0;margin-top:3px;"   id="list_name">诺贝尔文学奖获奖书单</el-button>
+      <el-button :span=14 style="margin-left:0;margin-top:3px;"  id="list_name">诺贝尔文学奖获奖书单</el-button>
       
     </div>
-</div>
   </div>
+</div>
     
 </template>
 
@@ -91,7 +91,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin-top: 13px;
+  margin-top: 16px;
 }
 #box_book{
   display: flex;
