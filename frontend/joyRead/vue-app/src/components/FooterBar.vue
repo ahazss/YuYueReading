@@ -28,7 +28,7 @@
  
 <script>
     export default {
-      name: "bottom",
+      name: "FooterBar",
       methods:{
         clickItem:function(path){
             this.$router.push(path);
