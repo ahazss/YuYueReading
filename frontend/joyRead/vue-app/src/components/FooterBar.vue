@@ -24,6 +24,7 @@
             </el-row>
         </el-footer>
     </el-container>
+    
 </template>
  
 <script>
@@ -43,6 +44,7 @@
     width: 100%;
     bottom:0px;
     border-top:1px solid #d2d2d2;
+    background-color: #ffffff;
     text-align: center;
   }
 

@@ -4,6 +4,8 @@ import Homepage from '@/views/Homepage'
 import WantToRead from '@/views/WantToRead'
 import Reading from '@/views/Reading'
 import HaveRead from '@/views/HaveRead'
+import AddByHand from '@/views/AddByHand'
+import ResultShow from '@/views/ResultShow'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +29,16 @@ export default new Router({
       path:'/have',
       name:'HaveRead',
       component:HaveRead
+    },
+    {
+      path:'/add',
+      name:'AddByHand',
+      component:AddByHand,
+    },
+    {
+      path:'/result',
+      name:'ResultShow',
+      component:ResultShow,
     }
   ]
 })
