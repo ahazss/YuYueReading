@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div style="text-align:center;">—  共 {{num}} 本  —</div>
+    <div style="text-align:center;margin-bottom:2%;">—  共 {{num}} 本  —</div>
     <BookItem></BookItem>
     <BookItem></BookItem>
     <BookItem></BookItem>
     <BookItem></BookItem>
     <BookItem></BookItem>
-        <FooterBar></FooterBar>
+    <FooterBar></FooterBar>
   </div>
 </template>
 

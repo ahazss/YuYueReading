@@ -2,12 +2,21 @@
   <el-container style="margin-bottom: 20px;">
     <el-aside style="width:150px;">
       <img src="https://img3.doubanio.com/view/subject/l/public/s4610502.jpg" class="image"></el-aside>
-    <el-main style="text-align: left;">
+    <el-container>
+    <el-header style="text-align: left;">
       <span class="title">{{ title }}</span>
       <p class="author"> {{ author }}</p>
-      <p class="detail1">{{ detail1 }}</p>
-      <p class="detail2">{{detail2}}</p>
-    </el-main>
+    </el-header>
+    <el-container>
+    <el-header>
+      <p id="detail_percent">{{ detail_percent }}</p>
+      <el-button id="turn_detail" size="mini" type='primary'>详情</el-button>
+    </el-header>
+    </el-container>
+    <el-footer>
+      <p id="detail_time">{{detail_time}}</p>
+    </el-footer>
+    </el-container>
   </el-container>
 </template>
 
@@ -21,8 +30,8 @@
         return{
           title:'标题',
           author:'作者',
-          detail1:' ',
-          detail2:'阅读huihu',
+          detail_percent:'',
+          detail_time:'',
         }
       },
       methods:{
@@ -39,19 +48,32 @@
   display: flex;
   }
 
-  .title{
-    
-    margin-top: 0px;
-  }
+.title{  
+  margin-top: 0px;
+}
 
-  .author{
-    font-size: 15px;
-    margin-top: 8px;
-  }
+.author{
+  font-size: 15px;
+  margin-top: 8px;
+}
 
-  .detail2{
-    font-size: 15px;
-    text-align: bottom;
-  }
+#detail_time{
+  font-size: 15px;
+  text-align: bottom;
+  float: left;
+}
+
+#detail_percent{
+  font-size: 13px;
+  float: left;
+  color: gray;
+}
   
+#turn_detail{
+  line-height:15px;
+  font-size: 12px;
+  float:right;
+  margin-right: 5%;
+  position: relative;
+}
 </style>

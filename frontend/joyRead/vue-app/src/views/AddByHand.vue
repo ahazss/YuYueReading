@@ -1,5 +1,10 @@
 <template>
 <div>
+    <el-container>
+    <el-header style="border-bottom:1px solid #d2d2d2;background-color: #f8a232;">
+    <p style="margin-top:4%;color:#ffffff;">填写详情</p>
+    </el-header>
+    </el-container>
     <el-form ref="bookForm" :model="bookForm" label-width="70px">
         <el-form-item label="书名">
             <el-input v-model="bookForm.bookname"></el-input>
@@ -42,6 +47,10 @@ export default {
     methods:{
         onSubmit(){
             console.log(this.bookForm);
+        },
+        goBack() {
+        this.$router.go(-1);
+        console.log('go back');
         },
     }
 };

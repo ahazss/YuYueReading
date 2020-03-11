@@ -6,6 +6,7 @@ import Reading from '@/views/Reading'
 import HaveRead from '@/views/HaveRead'
 import AddByHand from '@/views/AddByHand'
 import ResultShow from '@/views/ResultShow'
+import Scan from '@/views/Scan'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +40,10 @@ export default new Router({
       path:'/result',
       name:'ResultShow',
       component:ResultShow,
+    },{
+      path:'/scan',
+      name:'Scan',
+      component:Scan,
     }
   ]
 })
