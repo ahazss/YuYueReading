@@ -1,5 +1,4 @@
 <template>
-
 <div id="homepage-container">
   <div id="box_sign">
     <div id="box_date">
@@ -7,28 +6,32 @@
 
       <div id="week_font" style="margin-left:20px;">{{nowWeek}}</div>
     </div>
-    <img src="./../assets/img/sign_pic.png" style="height:75%;width:75%;margin-top:10px;margin-bottom:5px">
+    <div id="day_card">
+    <img src="./../assets/img/sign_pic.png" style="height:150px;width:300px;margin-top:16px;margin-bottom:10px">
     <span id="sign_1">它们像人一样，生命中更多时间是用来等待的。</span>
     <span id="sign_2">—— 《羊道 春牧场》李娟</span>
+    </div>
   </div>
   <div id="box_recommendation">
     <div id="box_recommendation_book">
       <div id="box_book">
         <img src="./../assets/img/book_pic_1.png" style="height:60%;width:60%"> 
         <el-button style="padding:3px 3px" type="text" id="book_name">葡萄牙的高山</el-button>
+        <div id="book_writer">[葡]杨·马特尔</div>
       </div>
       <div id="box_book">
         <img src="./../assets/img/book_pic_2.png" style="height:60%;width:60%">
         <el-button style="padding:3px 3px" type="text" id="book_name">白夜行</el-button>
+        <div id="book_writer">[日]东野圭吾</div>
       </div>
       <div id="box_book">
         <img src="./../assets/img/book_pic_3.png" style="height:60%;width:60%">
         <el-button style="padding:3px 3px" type="text" id="book_name">挪威的森林</el-button>
+        <div id="book_writer">[日]村上春树</div>
       </div>
     </div>
-    <span style="margin-top:3px;margin-bottom:3px;margin-left:10px;margin-right:10px;">——————————————</span>
+    <hr style="width:90%; margin-top:10px; margin-bottom:6px;"/>
     <div id="box_list">
-      
       <el-button :span=14   id="list_name">茅盾文学奖获奖书单</el-button>
       <el-button :span=14 style="margin-left:0;margin-top:3px;"  id="list_name">诺贝尔文学奖获奖书单</el-button>
     </div>
@@ -76,6 +79,13 @@ export default {
     width: 100%;
     position: fixed;
 }
+#day_card {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
 #box_sign{
   display: flex;
   flex-direction: column;
@@ -95,7 +105,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin-top: 16px;
+  margin-top: 22px;
 }
 #box_book{
   display: flex;
@@ -130,12 +140,20 @@ export default {
   font-family:"等线","微软雅黑","宋体";
 }
 #book_name{
-  font-size: 11px;
+  margin-top:2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #464543;
+}
+#book_writer {
+  font-size: 12px;
   font-weight: 100;
+  color: #696767;
 }
 #list_name{
-  font-size:17px;
-  font-weight:600;
+  border:0;
+  background-color: rgba(0,0,0,0);
+  font-size:16px;
 }
 #date_font{
   font-family: "Times New Roman", Times, serif;

@@ -7,6 +7,11 @@ import HaveRead from '@/views/HaveRead'
 import AddByHand from '@/views/AddByHand'
 import ResultShow from '@/views/ResultShow'
 import Scan from '@/views/Scan'
+import Login from '@/views/Login'
+import Register from '@/views/Register'
+import Settings from '@/views/Settings'
+import Myaccount from '@/views/Myaccount'
+
 Vue.use(Router)
 
 export default new Router({
@@ -40,10 +45,31 @@ export default new Router({
       path:'/result',
       name:'ResultShow',
       component:ResultShow,
-    },{
+    },
+    {
       path:'/scan',
       name:'Scan',
       component:Scan,
+    },
+    {
+      path: '/login',
+      name:'Login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
+    {
+      path:'/settings',
+      name: 'Settings',
+      component: Settings
+    },
+    {
+      path:'/myaccount',
+      name: 'Myaccount',
+      component: Myaccount
     }
   ]
 })
