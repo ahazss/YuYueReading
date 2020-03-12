@@ -20,7 +20,7 @@ Vue.use(ElementUI)
 
 const {
   token,
-  id,
+  userId,
   phone,
   name,
   avatar,
@@ -28,7 +28,7 @@ const {
 } = window.localStorage
 store.commit('profile/setUser', {
   token,
-  id,
+  userId,
   phone,
   name,
   avatar,
