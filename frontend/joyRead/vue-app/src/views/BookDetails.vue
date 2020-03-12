@@ -18,7 +18,7 @@
             
             <el-button-group v-if="status==2 || status==3">
                 <el-button type="primary">阅读完成</el-button>
-                <el-button type="primary">添加记录</el-button>
+                <el-button type="primary" @click="routeTo('AddRecord')">添加记录</el-button>
             </el-button-group>
             <el-rate
                 v-model="score"
@@ -64,7 +64,7 @@
 import ReadingRecords from "../components/ReadingRecords" 
 export default {
 
-  name: 'Bookdetails',
+  name: 'BookDetails',
   components:{
       ReadingRecords,
   },
@@ -84,7 +84,9 @@ export default {
 
   },
   methods:{
-
+    routeTo(name, params) {
+        this.$router.push({name, params});
+    },
   }
 }
 </script>
