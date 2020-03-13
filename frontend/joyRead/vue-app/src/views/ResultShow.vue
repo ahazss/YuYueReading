@@ -7,7 +7,8 @@
 <el-col :span="4" style="margin-left:3%;"><el-button icon="el-icon-search" @click="search(keywords)" circle></el-button></el-col>
 </el-row>
 </div>
-<div v-for="(item,index) in items" :key="index">
+<!-- v-if ="this.datas.isbn" -->
+<div  v-for="(item,index) in items" :key="index">
     <BookItem :item=item></BookItem>
 </div>
 
@@ -24,6 +25,7 @@ export default {
     data(){
         return{
             items:'',
+            datas:'',
             keywords:null,
             scanisbn:null,
         }
@@ -48,6 +50,8 @@ export default {
            console.log(this.scanisbn)
            this.$axios.get('/books/information/'+this.scanisbn)
            .then(response =>{
+               self.datas = response.data;
+               console.log(self.datas);
                self.items = response.data;
                console.log(self.items);
             })
