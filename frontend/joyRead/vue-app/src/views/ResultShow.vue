@@ -37,23 +37,21 @@ export default {
           var self=this
           console.log(this.keywords)
            this.$axios.get('/books/search?words='+this.keywords)
-          .then(response =>{self.items = response.data})
+          .then(response =>{self.items = response.data; console.log(self.items);})
           },
-    },
-    computed: {
-
     },
     created(){
        var self=this
-       console.log(this.$route.params.scanisbn)
        this.scanisbn = this.$route.params.scanisbn
-       console.log(this.scanisbn)
        if(this.scanisbn==null)console.log("no scanisbn")
        else{
-        //    this.scanisbn = this.$route.params.scanisbn
            console.log(this.scanisbn)
            this.$axios.get('/books/information/'+this.scanisbn)
-           .then(response =>{self.items = response.data})}
+           .then(response =>{
+               self.items = response.data;
+               console.log(self.items);
+            })
+        }        
     }
 }
 </script>
