@@ -3,9 +3,9 @@
     <video
       ref="video"
       id="video"
-      width="300"
+      width="100%"
       height="300"
-      style="margin-top:27%;margin-bottom:50%;"
+      style="margin-top:30%;margin-bottom:50%;"
     ></video>
   <FooterBar></FooterBar>
   </div>
@@ -27,7 +27,6 @@ export default {
     },
   data: () => ({
     codeReader: new BrowserMultiFormatReader(),
-    textContent: undefined
   }),
   async created () {
     this.codeReader.getVideoInputDevices()
@@ -37,7 +36,8 @@ export default {
         this.codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
           if (result) {
             console.log(result);
-            this.textContent = result.text;
+            console.log(result.text)
+            this.$router.push({name:'ResultShow',params:{scanisbn:result.text}})
           }
           if (err && !(err)) {
             console.error(err);

@@ -1,29 +1,59 @@
 <template>
 <div>
-<el-row type="flex" class="row-bg" justify="space-around" style="margin-top:2%;">
-<el-col :span="4"><el-button icon="el-icon-back" @click="goBack" circle></el-button></el-col>
+<div>
+<el-row type="flex" class="row-bg" justify="space-between" style="margin-top:2%;">
+<el-col :span="4" style="margin-left:3%;"><el-button icon="el-icon-back" @click="goBack" circle></el-button></el-col>
 <el-col :span="16"><el-input v-model="keywords" placeholder="请输入内容"></el-input></el-col>
-<el-col :span="4"><el-button icon="el-icon-search" circle></el-button></el-col>
+<el-col :span="4" style="margin-left:3%;"><el-button icon="el-icon-search" @click="search(keywords)" circle></el-button></el-col>
 </el-row>
+</div>
+<div v-for="(item,index) in items" :key="index">
+    <BookItem :item=item></BookItem>
+</div>
+
 </div>
 </template>
 
 <script>
+import BookItem from "../components/BookItem"
 export default {
     name:'ResultShow',
     components:{
-
+        BookItem,
     },
     data(){
         return{
-            keywords:'',
+            items:'',
+            keywords:null,
+            scanisbn:null,
         }
     },
     methods:{
-        goBack() {
-        this.$router.go(-1);
-        console.log('go back');
-      }
+      goBack() {
+          this.$router.go(-1);
+          console.log('go back')
+          },
+      search(keywords){
+          var self=this
+          console.log(this.keywords)
+           this.$axios.get('/books/search?words='+this.keywords)
+          .then(response =>{self.items = response.data})
+          },
+    },
+    computed: {
+
+    },
+    created(){
+       var self=this
+       console.log(this.$route.params.scanisbn)
+       this.scanisbn = this.$route.params.scanisbn
+       console.log(this.scanisbn)
+       if(this.scanisbn==null)console.log("no scanisbn")
+       else{
+        //    this.scanisbn = this.$route.params.scanisbn
+           console.log(this.scanisbn)
+           this.$axios.get('/books/information/'+this.scanisbn)
+           .then(response =>{self.items = response.data})}
     }
 }
 </script>
