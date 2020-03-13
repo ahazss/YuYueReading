@@ -7,12 +7,14 @@ import ElementUI from 'element-ui'
 import './assets/element-variables.scss'
 import './assets/font/font.css'
 import store from './store'
+import echarts from 'echarts'
 
 var axios = require('axios')
 // 修改此地址时需要修改config/index.js内的proxyTable的地址
 axios.defaults.baseURL = 'http://49.234.81.69:8081/api'
 //全局注册
 Vue.prototype.$axios = axios
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 
@@ -20,7 +22,7 @@ Vue.use(ElementUI)
 
 const {
   token,
-  id,
+  userId,
   phone,
   name,
   avatar,
@@ -28,7 +30,7 @@ const {
 } = window.localStorage
 store.commit('profile/setUser', {
   token,
-  id,
+  userId,
   phone,
   name,
   avatar,

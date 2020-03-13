@@ -12,24 +12,29 @@
       <div class="myaccount-inform">
           <div class="myaccount-item">
               <span>阅读天数</span><br/>
-              <span style="font-size: 28px; color:#fd9b1c;">{{data.days}}</span>
+              <span style="font-size: 28px; color:#fd9b1c;">{{data.totalDays}}</span>
               <span>天</span>
           </div>
           <div class="myaccount-item">
               <span>总图书数</span><br/>
-              <span style="font-size: 28px; color:#fd9b1c">{{data.books}}</span>
+              <span style="font-size: 28px; color:#fd9b1c">{{data.totalBooks}}</span>
               <span>本</span>
           </div>
           <div class="myaccount-item">
-              <span>总阅读数</span><br/>
-              <span style="font-size: 28px; color:#fd9b1c">{{data.reads}}</span>
+              <span>阅读完成</span><br/>
+              <span style="font-size: 28px; color:#fd9b1c">{{data.totalDone}}</span>
               <span>本</span>
           </div>
           <div class="myaccount-item">
-              <span>记录书摘</span><br/>
-              <span style="font-size: 28px; color:#fd9b1c">{{data.notes}}</span>
+              <span>进度记录</span><br/>
+              <span style="font-size: 28px; color:#fd9b1c">{{data.totalRecords}}</span>
               <span>条</span>
           </div>           
+      </div>
+      <MyEcharts></MyEcharts>
+      <div style="margin-left:6px;margin-top:6px;">阅读书籍</div>
+      <div v-for="(item, index) in items" :key="index">
+        <MyaccountItem :item=item></MyaccountItem>
       </div>
       </div>
       <div v-else class="visitor">
@@ -45,29 +50,30 @@
 
 <script>
 import FooterBar from "../components/FooterBar"
+import MyEcharts from "../components/MyEcharts"
+import MyaccountItem from "../components/MyaccountItem"
 
 export default {
     name: 'MyAccount',
       components: {
         FooterBar,
+        MyEcharts,
+        MyaccountItem,
     },
     data() {
         return {
             user: {
                 name: '张是是',
             },
-            data: {
-                days: '36',
-                books: '14',
-                reads: '6',
-                notes:'15',
-            }
+            data:'',
+            month:'11',
+            items:'',
         }
     },
     methods: {
         login() {
-            console.log('local id', localStorage.getItem('id'))
-            var res = localStorage.getItem('id')
+            console.log('local id', localStorage.getItem('userId'))
+            var res = localStorage.getItem('userId')
             if(res == null) return false;
             else {
                 this.user.name = localStorage.getItem('name')
@@ -82,7 +88,16 @@ export default {
             if(res == null) return 'http://q6vr3uv5e.bkt.clouddn.com/avatar.png'
             else return res;
         }
-    }
+    },
+    created() {
+        var self = this
+        var id = localStorage.getItem('userId')
+        this.$axios.get("/users/totaldata/"+id)
+        .then(response => (self.data = response.data))
+        
+        this.$axios.get("/books/userbooks?status=4&id="+id)
+        .then(response => (self.items = response.data))
+    },
 }
 </script>
 

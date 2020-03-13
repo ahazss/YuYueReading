@@ -11,10 +11,10 @@ const getters = {
 
 const actions = {
     async getAuthority({commit, state}, form) {
-        const {id, name, phone, avatar,status, authorization: token} = await api.getAuthority(form);
+        const {userId, name, phone, avatar,status, authorization: token} = await api.getAuthority(form);
         Object.assign(window.localStorage, {
             token,
-            id,
+            userId,
             phone,
             name,
             avatar,
@@ -22,12 +22,13 @@ const actions = {
         })
         commit('setUser', {
             token,
-            id,
+            userId,
             phone,
             name,
             avatar,
             status
         })
+        console.log("id:", userId)
         window.vm.$router.push({name: 'Myaccount'});
     }
 }
