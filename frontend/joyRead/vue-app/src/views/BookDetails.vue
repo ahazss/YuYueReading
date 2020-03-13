@@ -2,7 +2,7 @@
 <div>
 
     <div id="box_book" style="margin-top:5px">
-        <img :src=book_pic style="height:30%;width:30%;margin-left:10px">
+        <img :src='imgUrl(book_pic)' style="height:30%;width:30%;margin-left:10px">
         <div id="book_info">
             <div id="book_name">{{bookname}} </div>
             <div id="writer_name">{{writer}}</div>
@@ -14,7 +14,7 @@
                 <div id="read_time">日</div>
             </div>
 
-            <el-progress :text-inside="true" :stroke-width="19" :percentage="percentage"  style="width:195px;margin-bottom:3px" v-if="status==3"></el-progress>
+            <el-progress :text-inside="true" :stroke-width="19" :percentage="(percentage*100).toFixed(2)"  style="width:195px;margin-bottom:3px" v-if="status==3"></el-progress>
             <div v-if="status==0||status==1||status==2||status==4" style="margin-bottom:21px"></div>
             
             <el-button-group v-if="status==2 || status==3">
@@ -89,6 +89,12 @@ export default {
   methods:{
     routeTo(name, params) {
         this.$router.push({name, params});
+    },
+    imgUrl( _url ){
+      if( _url !== undefined ){
+        let _u = _url.substring( 7 );
+        return 'https://images.weserv.nl/?url=' + _u;
+        }
     },
     getBookDetails(){
         var self=this;

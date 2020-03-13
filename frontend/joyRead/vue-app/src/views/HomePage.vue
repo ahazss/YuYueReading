@@ -15,17 +15,17 @@
   <div id="box_recommendation">
     <div id="box_recommendation_book">
       <div id="box_book">
-        <img :src=book1.book_pic style="height:80px;width:60px"> 
+        <img :src='imgUrl(book1.book_pic)' style="height:80px;width:60px"> 
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book1.isbn}})">{{book1.book_name}}</el-button>
         <div id="book_writer">{{book1.book_writer}}</div>
       </div>
       <div id="box_book">
-        <img :src=book2.book_pic style="height:80px;width:60px">
+        <img :src='imgUrl(book2.book_pic)' style="height:80px;width:60px">
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book2.isbn}})">{{book2.book_name}}</el-button>
         <div id="book_writer">{{book2.book_writer}}</div>
       </div>
       <div id="box_book">
-        <img :src=book3.book_pic style="height:80px;width:60px">
+        <img :src='imgUrl(book3.book_pic)' style="height:80px;width:60px">
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book3.isbn}})">{{book3.book_name}}</el-button>
         <div id="book_writer">{{book3.book_writer}}</div>
       </div>
@@ -99,48 +99,52 @@ export default {
       
   },
   methods:{
-        getRecBook(){
-            var self=this;
-            this.$axios.get('/books//recommended_books/'+this.user_id)
-            .then(response=>{
-                self.book1.isbn= response.data[0].isbn;
-                self.book1.book_name=response.data[0].name;
-                self.book1.book_pic=response.data[0].pic;
-                self.book1.writer=response.data[0].writer;
-                self.book2.isbn= response.data[1].isbn;
-                self.book2.book_name=response.data[1].name;
-                self.book2.book_pic=response.data[1].pic;
-                self.book2.writer=response.data[1].writer;
-                self.book3.isbn= response.data[2].isbn;
-                self.book3.book_name=response.data[2].name;
-                self.book3.book_pic=response.data[2].pic;
-                self.book3.writer=response.data[2].writer;
-            })
-        },
-        getRecBookList(){
-          var self=this;
-          this.$axios.get('/booklists//recommended_booklists/'+this.user_id)
-          .then(response=>{
-            self.booklist1.booklist_id=response.data[0].id;
-            self.booklist1.booklist_name=response.data[0].name;
-            self.booklist2.booklist_id=response.data[1].id;
-            self.booklist2.booklist_name=response.data[1].name;
-          })
-        },
-        login() {
-            console.log('local id', localStorage.getItem('id'))
-            var res = localStorage.getItem('id')
-            if(res == null) return false;
-            else {
-                this.user.name = localStorage.getItem('name')
-                return true;
-            }
-        },
-         routeTo(name, params) {
-           this.$router.push({name, params});
-        },
-
-
+    imgUrl( _url ){
+      if( _url !== undefined ){
+        let _u = _url.substring( 7 );
+        return 'https://images.weserv.nl/?url=' + _u;
+        }
+    },
+    getRecBook(){
+        var self=this;
+        this.$axios.get('/books//recommended_books/'+this.user_id)
+        .then(response=>{
+            self.book1.isbn= response.data[0].isbn;
+            self.book1.book_name=response.data[0].name;
+            self.book1.book_pic=response.data[0].pic;
+            self.book1.writer=response.data[0].writer;
+            self.book2.isbn= response.data[1].isbn;
+            self.book2.book_name=response.data[1].name;
+            self.book2.book_pic=response.data[1].pic;
+            self.book2.writer=response.data[1].writer;
+            self.book3.isbn= response.data[2].isbn;
+            self.book3.book_name=response.data[2].name;
+            self.book3.book_pic=response.data[2].pic;
+            self.book3.writer=response.data[2].writer;
+        })
+    },
+    getRecBookList(){
+      var self=this;
+      this.$axios.get('/booklists//recommended_booklists/'+this.user_id)
+      .then(response=>{
+        self.booklist1.booklist_id=response.data[0].id;
+        self.booklist1.booklist_name=response.data[0].name;
+        self.booklist2.booklist_id=response.data[1].id;
+        self.booklist2.booklist_name=response.data[1].name;
+      })
+    },
+    login() {
+        console.log('local id', localStorage.getItem('userId'))
+        var res = localStorage.getItem('userId')
+        if(res == null) return false;
+        else {
+            this.user.name = localStorage.getItem('name')
+            return true;
+        }
+    },
+      routeTo(name, params) {
+       this.$router.push({name, params});
+    },
   }
 }
 </script>
