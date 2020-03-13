@@ -66,8 +66,8 @@ export default {
     },
     methods: {
         login() {
-            console.log('local id', localStorage.getItem('id'))
-            var res = localStorage.getItem('id')
+            console.log('local id', localStorage.getItem('userId'))
+            var res = localStorage.getItem('userId')
             if(res == null) return false;
             else {
                 this.user.name = localStorage.getItem('name')
