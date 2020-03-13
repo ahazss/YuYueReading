@@ -11,7 +11,9 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Settings from '@/views/Settings'
 import Myaccount from '@/views/Myaccount'
-
+import BookDetails from '@/views/BookDetails'
+import AddRecord from '@/views/AddRecord'
+import BookList from '@/views/BookList'
 Vue.use(Router)
 
 export default new Router({
@@ -70,6 +72,23 @@ export default new Router({
       path:'/myaccount',
       name: 'Myaccount',
       component: Myaccount
+    },
+    {
+      path:'/bookdetails',
+      name:'BookDetails',
+      component:BookDetails
+    },
+    {
+      path:'/addrecord',
+      name:'AddRecord',
+      component:AddRecord
+    },
+    {
+      path:'/booklist',
+      name:'BookList',
+      component:BookList
     }
+
+
   ]
 })

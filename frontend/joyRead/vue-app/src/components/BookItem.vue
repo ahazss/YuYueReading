@@ -12,7 +12,7 @@
     <el-header>
       <p v-if="status === 3" id="detail_percent">阅读至 {{(item.percentage*100).toFixed(2)}}%</p>
       <p v-else id="detail_percent">{{detail_percent}}</p>
-      <el-button id="turn_detail" size="mini" type='primary'>详情</el-button>
+      <el-button id="turn_detail" size="mini" type='primary' @click="$router.push({name:'BookDetails',params:{isbn:item.isbn}})">详情</el-button>
     </el-header>
     </el-container>
     <el-footer> 
