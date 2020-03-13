@@ -17,7 +17,7 @@
         <el-form-item label="书摘内容">
              <el-input type="textarea" v-model="form.text"></el-input>
         </el-form-item>
-        <el-button style="flex-grow:2;" type="primary" id="button2" v-on:click="addRecord" >添加</el-button>
+        <el-button style="flex-grow:2;" type="primary" id="button2" v-on:click="addRecord()" >添加</el-button>
     </el-form>
     
 </div>
@@ -29,6 +29,7 @@ export default {
     name:'AddRecord',
     data(){
         return{
+            user_id:"0",
             form:{
             startpage:"",
             endpage:"",
@@ -43,13 +44,20 @@ export default {
         },
         addRecord() {
             const form = {
-                startpage: this.form.startpage,
-                endpage: this.form.endpage,
-                date:this.form.date,
-                text:this.form.text
+                id:this.user_id,
+                isbn:this.isbn,
+                startPage: this.form.startpage,
+                endPage: this.form.endpage,
+                note:this.form.text
             }
+            this.$axios.put('api/records/add/',form)
             //this.$store.dispatch('profile/getAuthority', form)
         }
+    },
+    created(){
+        this.user_id=localStorage.getItem('userId');
+        this.isbn=this.$route.params.isbn;
+
     }
     
 }

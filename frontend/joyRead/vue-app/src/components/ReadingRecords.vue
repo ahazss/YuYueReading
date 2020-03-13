@@ -3,16 +3,16 @@
 
         <el-aside style="width:100px;height:50px" >
             <div class="border_weekday" style="height:20px">
-                {{data}}
+                {{item.data}}
             </div>
 
             <div  class="border_range" style="height:27px">
-                {{startpage}}-{{endpage}}
+                {{item.start_page}}-{{item.end_page}}
             </div>
         </el-aside>
         
         <el-main class="border_record" style="width:200px;height:50px;padding:2px">
-                {{text}}
+                {{item.note}}
         </el-main>
         
     </el-container>
@@ -21,6 +21,9 @@
 <script>
 export default {
     name:"ReadingRecords",
+    props:[
+        'item'
+    ],
     data(){
         return{
             data:'12.21',
