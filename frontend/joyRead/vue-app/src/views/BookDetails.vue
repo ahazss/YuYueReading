@@ -1,6 +1,6 @@
 <template>
 <div>
-
+    <el-card id="item-detail">图书详情</el-card>
     <div id="box_book" style="margin-top:5px">
         <img :src='imgUrl(book_pic)' style="height:30%;width:30%;margin-left:10px">
         <div id="book_info">
@@ -129,22 +129,33 @@ export default {
     }
   },
   created(){
+      var self = this
       this.user_id=localStorage.getItem('userId');
       this.isbn=this.$route.params.isbn;
       this.getBookDetails();
-      if(self.status==3||self.status==4){
-          this.$axios.get('/api/records/all?id='+this.user_id+'&isbn='+this.isbn)
+      console.log("status:",self.status)
+      if(self.status==0||self.status==4){
+          this.$axios.get('/records/all?id='+this.user_id+'&isbn='+this.isbn)
           .then(response=>{
+              console.log("data:",response.data)
               self.items=response.data
+              console.log("items:",self.items)
           })
       }
-      
-      console.log(this.isbn)
   }
 }
 </script>
 
 <style lang="scss" scoped>
+#item-detail{
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    border-top:0;
+    border-left: 0;
+    border-right:0;
+    text-align: center;
+    padding: 0;
+    font-size: 20px;
+}
 #box_book{
     display: flex;
     flex-direction: row;
@@ -205,6 +216,10 @@ export default {
     text-align:justify;
 }
 
-    
+</style>
 
+<style>
+.el-card__body {
+    padding:10px;
+}
 </style>

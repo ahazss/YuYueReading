@@ -3,11 +3,11 @@
 
         <el-aside style="width:100px;height:50px" >
             <div class="border_weekday" style="height:20px">
-                {{item.data}}
+                {{item.date}}
             </div>
 
             <div  class="border_range" style="height:27px">
-                {{item.start_page}}-{{item.end_page}}
+                {{item.startPage}}-{{item.endPage}}
             </div>
         </el-aside>
         
