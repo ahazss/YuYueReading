@@ -45,6 +45,7 @@ public class BookController {
         }
     }
 
+    @CrossOrigin
     @GetMapping(value="/recommended_books/{id}")
     ResponseEntity<List<BasicBookInfoDTO>> getRecommendedBooks(@PathVariable("id")Integer id) {
         try {
@@ -61,6 +62,7 @@ public class BookController {
         }
     }
 
+    @CrossOrigin
     @GetMapping(value="/information/detail")
     ResponseEntity<BookInfoDTO> getDetailBookInfo(@RequestParam("id")Integer id, @RequestParam("isbn")String isbn) {
         try {
@@ -92,6 +94,7 @@ public class BookController {
         }
     }
 
+    @CrossOrigin
     @GetMapping(value="/userbooks")
     ResponseEntity<List<UserListDTO>> getUserBookList(@RequestParam("status")Integer status, @RequestParam("id")Integer id) {
         try {
@@ -136,6 +139,7 @@ public class BookController {
         }
     }
 
+    @CrossOrigin
     @PutMapping(value="/change")
     ResponseEntity<Integer> addBookToReadylist(@RequestParam("id")Integer id, @RequestParam("isbn")String isbn) {
         try {
@@ -158,6 +162,7 @@ public class BookController {
         }
     }
 
+    @CrossOrigin
     @PutMapping(value="/end")
     ResponseEntity<Integer> finishReadUserbook(
             @RequestParam("id")Integer id, @RequestParam("isbn")String isbn, @RequestParam("point")float point) {
@@ -185,9 +190,11 @@ public class BookController {
         }
     }
 
+    @CrossOrigin
     @PostMapping(value="/add")
     ResponseEntity<Boolean> addBookInfo(@RequestBody Book book) {
         try {
+            book.setPic("http://q6vr3uv5e.bkt.clouddn.com/defaultPic.png");
             bookService.addOrUpdate(book);
             Book newbook = bookService.findBookByIsbn(book.getIsbn());
             if (newbook == null) {
@@ -199,5 +206,26 @@ public class BookController {
             e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/search")
+    ResponseEntity<List<BasicBookInfoDTO>> searchBooks(@RequestParam("words")String words) {
+        try {
+            List<Book> booksName = bookService.searchName("%" + words + "%");
+            List<Book> booksWriter = bookService.searchWriter("%" + words + "%");
+            List<BasicBookInfoDTO> result = new ArrayList<>();
+            for (int i=0; i<booksName.size(); i++) {
+                result.add(new BasicBookInfoDTO(booksName.get(i)));
+            }
+            for (int i=0; i<booksWriter.size(); i++) {
+                result.add(new BasicBookInfoDTO(booksWriter.get(i)));
+            }
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+
     }
 }

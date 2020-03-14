@@ -23,4 +23,14 @@ public class RecordServiceImpl implements RecordService {
         Record result = recordDAO.save(record);
         return result.getId();
     }
+
+    @Override
+    public int getTotalDays(int id) {
+        return recordDAO.getAllDays(id);
+    }
+
+    @Override
+    public int getTotalRecords(int id) {
+        return recordDAO.getAllByUserId(id).size();
+    }
 }

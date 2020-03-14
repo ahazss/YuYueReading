@@ -58,4 +58,19 @@ public class BookServiceImpl implements BookService {
     public void addOrUpdate(Userbook userbook) {
         userbookDAO.save(userbook);
     }
+
+    @Override
+    public List<Book> searchName(String words) {
+        return bookDAO.findAllByNameLike(words);
+    }
+
+    @Override
+    public List<Book> searchWriter(String words) {
+        return bookDAO.findAllByWriterLike(words);
+    }
+
+    @Override
+    public List<Userbook> getAll(int userId) {
+        return userbookDAO.findAllByUserId(userId);
+    }
 }

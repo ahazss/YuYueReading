@@ -26,4 +26,12 @@ public interface BookService {
 
     //更新用户图书
     public void addOrUpdate(Userbook userbook);
+
+    //搜索
+    public List<Book> searchName(String words);
+
+    public List<Book> searchWriter(String words);
+
+    //获取所有用户图书
+    public List<Userbook> getAll(int userId);
 }
