@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class RecordController {
     @Autowired
     BookServiceImpl bookService;
 
+    @CrossOrigin
     @GetMapping(value="/all")
     public ResponseEntity<List<RecordDTO>> getAllUserbookRecord(@RequestParam("id")Integer userId, @RequestParam("isbn")String isbn) {
         try {
@@ -49,10 +51,12 @@ public class RecordController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<Integer> modifyRecord(@RequestBody Record record) {
         try {
             //添加记录
+            record.setDate(LocalDate.now());
             int recordId = recordService.addOrUpdate(record);
             if (recordId == 0) {
                 throw new ServiceException("Add or modify record failed");

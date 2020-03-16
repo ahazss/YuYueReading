@@ -10,7 +10,9 @@ public interface BookDAO extends JpaRepository<Book,Integer> {
     //关键的地方在于方法的名字。
     Book findByIsbn(String isbn);
 
-    List<Book> findAllByNameLikeOrWriterLike(String keyword1, String keyword2);
+    List<Book> findAllByNameLike(String keyword);
+
+    List<Book> findAllByWriterLike(String keyword);
 
     //获取推荐图书
     @Query(value = "select * from Book order by grade desc LIMIT 3", nativeQuery = true)

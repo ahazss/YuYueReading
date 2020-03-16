@@ -192,6 +192,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  width: 120px;
 }
 #box_list{
   display: flex;

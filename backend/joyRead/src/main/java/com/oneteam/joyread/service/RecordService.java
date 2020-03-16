@@ -11,4 +11,10 @@ public interface RecordService {
 
     //添加或修改阅读记录
     public Integer addOrUpdate(Record record);
+
+    //阅读天数
+    public int getTotalDays(int id);
+
+    //总进度记录条数
+    public int getTotalRecords(int id);
 }

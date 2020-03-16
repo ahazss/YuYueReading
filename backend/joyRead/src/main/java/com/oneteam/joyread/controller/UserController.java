@@ -1,7 +1,10 @@
 package com.oneteam.joyread.controller;
 
 import com.oneteam.joyread.dto.LoginDTO;
+import com.oneteam.joyread.dto.TotalDataDTO;
 import com.oneteam.joyread.entity.User;
+import com.oneteam.joyread.service.implementation.BookServiceImpl;
+import com.oneteam.joyread.service.implementation.RecordServiceImpl;
 import com.oneteam.joyread.service.implementation.UserServiceImpl;
 import com.oneteam.joyread.utils.JWTUtil;
 import org.apache.shiro.authz.UnauthenticatedException;
@@ -17,6 +20,12 @@ public class UserController {
 
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    BookServiceImpl bookService;
+
+    @Autowired
+    RecordServiceImpl recordService;
 
     @CrossOrigin
     @PostMapping(value="/login")
@@ -42,6 +51,22 @@ public class UserController {
         try {
             return new ResponseEntity<>("123456", HttpStatus.OK);
             //return new ResponseEntity<>(userService.getVerifyCode(phone), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/totaldata/{id}")
+    public ResponseEntity<TotalDataDTO> getUserData(@PathVariable("id")Integer id) {
+        try {
+            int days = recordService.getTotalDays(id);
+            int books = bookService.getAll(id).size();
+            int done = bookService.getAllUserbook(id, 4).size();
+            int records = recordService.getTotalRecords(id);
+            TotalDataDTO totalDataDTO = new TotalDataDTO(days, books, done, records);
+            return new ResponseEntity<>(totalDataDTO, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);

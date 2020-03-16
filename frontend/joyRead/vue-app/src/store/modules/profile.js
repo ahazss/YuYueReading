@@ -28,6 +28,7 @@ const actions = {
             avatar,
             status
         })
+        console.log("id:", userId)
         window.vm.$router.push({name: 'Myaccount'});
     }
 }

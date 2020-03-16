@@ -19,9 +19,9 @@
                   <i class="el-icon-collection" style="font-size:20px;"></i><p>已读</p></div>
                 </el-col>
               <el-col :span="4">
-                  <div class="item"  @click="clickItem('/myaccount')">
+                  <div class="item"  @click="clickItem('/myaccount')" :class="{active: $route.path==='/myaccount'}">
                   <i class="el-icon-user" style="font-size:20px;"></i><p>我的</p></div>
-                  </el-col>
+              </el-col>
             </el-row>
         </el-footer>
     </el-container>
