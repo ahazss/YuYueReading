@@ -4,7 +4,6 @@
     <div v-for="(item,index) in items" :key="index">
       <BookItem :item=item :status=3></BookItem>
     </div>
-
         <FooterBar></FooterBar>
   </div>
   

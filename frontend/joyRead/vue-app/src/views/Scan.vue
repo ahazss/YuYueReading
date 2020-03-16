@@ -29,15 +29,16 @@ export default {
     codeReader: new BrowserMultiFormatReader(),
   }),
   async created () {
+    var self=this
     this.codeReader.getVideoInputDevices()
       .then((videoInputDevices) => {
         const selectedDeviceId = videoInputDevices[0].deviceId;
 
         this.codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
           if (result) {
-            console.log(result);
             console.log(result.text)
             this.$router.push({name:'ResultShow',params:{scanisbn:result.text}})
+            return
           }
           if (err && !(err)) {
             console.error(err);

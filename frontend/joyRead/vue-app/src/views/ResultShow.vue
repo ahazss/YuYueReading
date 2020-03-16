@@ -10,7 +10,6 @@
 <div v-for="(item,index) in items" :key="index">
     <BookItem :item=item></BookItem>
 </div>
-
 </div>
 </template>
 
@@ -23,7 +22,7 @@ export default {
     },
     data(){
         return{
-            items:'',
+            items:[],
             keywords:null,
             scanisbn:null,
         }
@@ -38,20 +37,20 @@ export default {
           console.log(this.keywords)
            this.$axios.get('/books/search?words='+this.keywords)
           .then(response =>{self.items = response.data; console.log(self.items);})
-          },
+        },
     },
     created(){
        var self=this
        this.scanisbn = this.$route.params.scanisbn
-       if(this.scanisbn==null)console.log("no scanisbn")
-       else{
-           console.log(this.scanisbn)
-           this.$axios.get('/books/information/'+this.scanisbn)
-           .then(response =>{
-               self.items = response.data;
-               console.log(self.items);
-            })
-        }        
+          if(this.scanisbn){
+          this.$axios.get('/books/information/'+this.scanisbn)
+              .then(response =>{
+                  self.items.push(response.data)
+                  console.log(self.items)
+              })      
+          }else{
+              console.log("no result")
+          }
     }
 }
 </script>
