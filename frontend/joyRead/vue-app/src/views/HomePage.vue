@@ -138,7 +138,7 @@ export default {
         var res = localStorage.getItem('userId')
         if(res == null) return false;
         else {
-            this.user.name = localStorage.getItem('name')
+            
             return true;
         }
     },

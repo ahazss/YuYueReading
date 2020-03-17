@@ -19,7 +19,7 @@
             
             <el-button-group v-if="status==2 || status==3">
                 <el-button type="primary" @click="addHaveRead()">阅读完成</el-button>
-                <el-button type="primary" @click="$router.push({name:'AddRecord',params:{isbn:self.isbn}})">添加记录</el-button>
+                <el-button type="primary" @click="$router.push({name:'AddRecord',params:{isbn:isbn}})">添加记录</el-button>
             </el-button-group>
             <el-rate
                 v-model="score"
@@ -71,7 +71,7 @@ export default {
     return {
         items:'',
         user_id:"1",
-        isbn:"9787544276986",
+        isbn:"",
         bookname:"你当像鸟飞往你的山",//book name
         book_pic:"https://img9.doubanio.com/view/subject/l/public/s33492346.jpg",
         writer:"[美]塔拉·韦斯特弗",//Book writer
@@ -131,7 +131,9 @@ export default {
   created(){
       var self = this
       this.user_id=localStorage.getItem('userId');
-      this.isbn=this.$route.params.isbn;
+      if(self.isbn==""){
+        this.isbn=this.$route.params.isbn;
+      }
       this.getBookDetails();
       console.log("status:",self.status)
       if(self.status==0||self.status==4){
