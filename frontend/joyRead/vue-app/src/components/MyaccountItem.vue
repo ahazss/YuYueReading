@@ -1,6 +1,6 @@
 <template>
   <div class="item-box">
-      <el-image :src='imgUrl(item.pic)' style="width:60px;height: 80px;margin-right:15px;"></el-image>
+      <el-image :src=item.pic style="width:60px;height: 80px;margin-right:15px;"></el-image>
       <div class="item-info">
           <div class="item-title">{{item.name}}</div>
           <div class="item-text">{{item.writer}}</div>
@@ -22,12 +22,6 @@ export default {
         }
     },
     methods:{
-        imgUrl( _url ){
-          if( _url !== undefined ){
-            let _u = _url.substring( 7 );
-            return 'https://images.weserv.nl/?url=' + _u;
-            }
-          },
     }
 }
 </script>

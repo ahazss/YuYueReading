@@ -15,17 +15,17 @@
   <div id="box_recommendation">
     <div id="box_recommendation_book">
       <div id="box_book">
-        <img :src='imgUrl(book1.book_pic)' style="height:80px;width:60px"> 
+        <img :src=book1.book_pic style="height:80px;width:60px"> 
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book1.isbn}})">{{book1.book_name}}</el-button>
         <div id="book_writer">{{book1.book_writer}}</div>
       </div>
       <div id="box_book">
-        <img :src='imgUrl(book2.book_pic)' style="height:80px;width:60px">
+        <img :src=book2.book_pic style="height:80px;width:60px">
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book2.isbn}})">{{book2.book_name}}</el-button>
         <div id="book_writer">{{book2.book_writer}}</div>
       </div>
       <div id="box_book">
-        <img :src='imgUrl(book3.book_pic)' style="height:80px;width:60px">
+        <img :src=book3.book_pic style="height:80px;width:60px">
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book3.isbn}})">{{book3.book_name}}</el-button>
         <div id="book_writer">{{book3.book_writer}}</div>
       </div>
@@ -99,12 +99,6 @@ export default {
       
   },
   methods:{
-    imgUrl( _url ){
-      if( _url !== undefined ){
-        let _u = _url.substring( 7 );
-        return 'https://images.weserv.nl/?url=' + _u;
-        }
-    },
     getRecBook(){
         var self=this;
         this.$axios.get('/books//recommended_books/'+this.user_id)

@@ -8,6 +8,7 @@ import './assets/element-variables.scss'
 import './assets/font/font.css'
 import store from './store'
 import echarts from 'echarts'
+import Meta from 'vue-meta'
 
 var axios = require('axios')
 // 修改此地址时需要修改config/index.js内的proxyTable的地址
@@ -19,6 +20,8 @@ Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+
+Vue.use(Meta)
 
 const {
   token,
@@ -43,5 +46,13 @@ window.vm = new Vue({
   router,
   store: store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  metaInfo: {
+        title: 'JoyRead',      
+        meta: [
+          { charset: 'utf-8' },        
+          { name: 'referrer',
+            content: 'never' }      
+          ]    
+  },
 })

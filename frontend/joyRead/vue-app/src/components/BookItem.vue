@@ -2,7 +2,7 @@
 <div>
   <el-container id="total">
     <el-aside style="width:130px;">
-      <el-image :src='imgUrl(item.pic)' class="image"></el-image></el-aside>
+      <el-image :src=item.pic class="image"></el-image></el-aside>
     <el-container>
     <el-header style="text-align: left;">
       <span class="title">{{ item.name }}</span>
@@ -44,12 +44,6 @@
         }
       },
       methods:{
-        imgUrl( _url ){
-          if( _url !== undefined ){
-            let _u = _url.substring( 7 );
-            return 'https://images.weserv.nl/?url=' + _u;
-            }
-          },
         }
     }
 </script>

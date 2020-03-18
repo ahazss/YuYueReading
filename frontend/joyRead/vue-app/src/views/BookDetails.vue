@@ -2,7 +2,7 @@
 <div>
     <el-card id="item-detail">图书详情</el-card>
     <div id="box_book" style="margin-top:5px">
-        <img :src='imgUrl(book_pic)' style="height:30%;width:30%;margin-left:10px">
+        <img :src=book_pic style="height:30%;width:30%;margin-left:10px">
         <div id="book_info">
             <div id="book_name">{{bookname}} </div>
             <div id="writer_name">{{writer}}</div>
@@ -89,12 +89,6 @@ export default {
   methods:{
     routeTo(name, params) {
         this.$router.push({name, params});
-    },
-    imgUrl( _url ){
-      if( _url !== undefined ){
-        let _u = _url.substring( 7 );
-        return 'https://images.weserv.nl/?url=' + _u;
-        }
     },
     getBookDetails(){
         var self=this;
