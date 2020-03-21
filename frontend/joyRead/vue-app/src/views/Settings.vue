@@ -43,13 +43,14 @@
         <span slot="title" style="font-size:16px;">版本更新</span>
         <span style="float:right;">当前版本(0.0.1)</span>
       </el-menu-item>
-      <el-button type="danger" class="settings-out">退出登录</el-button>
+      <el-button type="danger" class="settings-out" @click="doClear()">退出登录</el-button>
     </el-menu>
 </div>
 </template>
 
 <script>
 export default {
+    inject:['reload'],
     name: "Settings",
     data() {
         return {
@@ -61,6 +62,10 @@ export default {
       routeTo(name, params) {
            this.$router.push({name, params});
       },
+      doClear() {
+        localStorage.clear();
+        this.reload();
+      }
     }
 }
 </script>
