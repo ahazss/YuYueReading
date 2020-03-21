@@ -1,23 +1,25 @@
 <template>
-<div>
-    <el-button plain icon="el-icon-arrow-left" class="return" @click="routeTo('BookDetails')">返回</el-button>
+<div class="addRecord-container">
+    <div class="head-title">
+        <el-card id="item-detail" style="height:44px;">
+            <el-button plain icon="el-icon-arrow-left" class="return" @click="$router.push({name:'BookDetails',params:{isbn:isbn}})">返回</el-button>
+            添加书摘
+        </el-card>
+    </div>
     <el-form class="record-card">
-        <el-form-item label="阅读时间">
-            <el-col :span="11">
-             <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;">
-             </el-date-picker>
-             </el-col>
-        </el-form-item>
         <el-form-item label="起始页码">   
-            <el-input v-model="form.startpage" style="width: 20%;"></el-input>          
+            <el-input v-model="form.startpage" placeholder="请输入阅读起始页码" style="width: 70%;"></el-input>          
          </el-form-item>
         <el-form-item label="终止页码">
-          <el-input v-model="form.endpage" style="width: 20%;"></el-input>
+          <el-input v-model="form.endpage"  placeholder="请输入阅读结束页码" style="width: 70%;"></el-input>
         </el-form-item>
         <el-form-item label="书摘内容">
-             <el-input type="textarea" v-model="form.text"></el-input>
+          <el-input type="textarea" :rows="9" v-model="form.text" class="input"></el-input>
         </el-form-item>
-        <el-button style="flex-grow:2;" type="primary" id="button2" v-on:click="addRecord()" >添加</el-button>
+        <div class="register-button">
+         <el-button style="flex-grow:2" type="primary" @click="addRecord()">确定</el-button>
+         <el-button style="flex-grow:1"  @click="$router.push({name:'BookDetails',params:{isbn:isbn}})">取消</el-button>
+      </div>
     </el-form>
     
 </div>
@@ -69,5 +71,44 @@ export default {
     margin-left:13%;
     width:80%;
     background-color: rgba(0,0,0,0)
+}
+
+.return {
+    padding:0;
+    background: rgba(0,0,0,0);
+    margin-right: 25%;
+    margin-top: 6px;
+    width: 15%;
+    height: 5%;
+    border: 0px;
+}
+
+#item-detail{
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    border-top:0;
+    border-left: 0;
+    border-right:0;
+    padding: 0;
+    font-size: 18px;
+}
+
+.addRecord-container {
+     background: url('../assets/img/scan-bg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+.input {
+    width: 70%;
+}
+
+.register-button {
+    display: flex;
+    margin-top: 10%;
+    margin-left: 15%;
+    width: 70%;
 }
 </style>

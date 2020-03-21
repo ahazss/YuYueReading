@@ -1,15 +1,21 @@
 <template>
 <div>
-<div>
-<el-row type="flex" class="row-bg" justify="space-between" style="margin-top:2%;">
-<el-col :span="4" style="margin-left:3%;"><el-button icon="el-icon-back" @click="goBack" circle></el-button></el-col>
-<el-col :span="16"><el-input v-model="keywords" placeholder="请输入内容"></el-input></el-col>
-<el-col :span="4" style="margin-left:3%;"><el-button icon="el-icon-search" @click="search(keywords)" circle></el-button></el-col>
-</el-row>
-</div>
-<div v-for="(item,index) in items" :key="index">
+  <div>
+    <el-row type="flex" class="row-bg" justify="space-between" style="margin-top:2%;">
+      <el-col :span="4" style="margin-left:3%;">
+        <el-button icon="el-icon-back" @click="goBack" circle></el-button>
+      </el-col>
+      <el-col :span="16">
+        <el-input v-model="keywords" placeholder="请输入搜索内容"></el-input>
+      </el-col>
+      <el-col :span="4" style="margin-left:3%;">
+        <el-button icon="el-icon-search" @click="search(keywords)" circle></el-button>
+      </el-col>
+    </el-row>
+  </div>
+  <div v-for="(item,index) in items" :key="index">
     <BookItem :item=item></BookItem>
-</div>
+  </div>
 </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="haveread-container">
     <div id="count-head">—  共 {{items.length}} 本  —</div>
     <div v-for="(item,index) in items" :key="index">
       <BookItem :item=item :status=4></BookItem>
@@ -35,6 +35,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.haveread-container {
+  background: url('~@/../src/assets/img/listbg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height:100%;
+  width:100%;
+  position: fixed;
+}
+
 #count-head{
   text-align:center;
   margin-bottom:2%;

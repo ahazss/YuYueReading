@@ -15,22 +15,22 @@
   <div id="box_recommendation">
     <div id="box_recommendation_book">
       <div id="box_book">
-        <img :src=book1.book_pic style="height:80px;width:60px"> 
+        <img :src=book1.book_pic style="height:90px;width:60px"> 
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book1.isbn}})">{{book1.book_name}}</el-button>
         <div id="book_writer">{{book1.book_writer}}</div>
       </div>
       <div id="box_book">
-        <img :src=book2.book_pic style="height:80px;width:60px">
+        <img :src=book2.book_pic style="height:90px;width:60px">
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book2.isbn}})">{{book2.book_name}}</el-button>
         <div id="book_writer">{{book2.book_writer}}</div>
       </div>
       <div id="box_book">
-        <img :src=book3.book_pic style="height:80px;width:60px">
+        <img :src=book3.book_pic style="height:90px;width:70px">
         <el-button style="padding:3px 3px" type="text" id="book_name" @click="$router.push({name:'BookDetails',params:{isbn: book3.isbn}})">{{book3.book_name}}</el-button>
         <div id="book_writer">{{book3.book_writer}}</div>
       </div>
     </div>
-    <hr style="width:90%; margin-top:10px; margin-bottom:6px;"/>
+    <hr style="width:90%; margin-top:16px; margin-bottom:6px;"/>
     <div id="box_list">
       <el-button :span=14   id="list_name" @click="$router.push({name:'BookList',params:{booklist_id:booklist1.booklist_id}})">{{booklist1.booklist_name}}</el-button>
       <el-button :span=14 style="margin-left:0;margin-top:3px;"  id="list_name" @click="$router.push({name:'BookList',params:{booklist_id:booklist2.booklist_id}})">{{booklist2.booklist_name}}</el-button>
@@ -215,7 +215,7 @@ export default {
   font-family:"等线","微软雅黑","宋体";
 }
 #book_name{
-  margin-top:2px;
+  margin-top:4px;
   font-size: 14px;
   font-weight: 500;
   color: #464543;

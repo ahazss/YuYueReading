@@ -1,7 +1,7 @@
 <template>
 <div>
   <el-container id="total">
-    <el-aside style="width:130px;">
+    <el-aside style="width:100px;">
       <el-image :src=item.pic class="image"></el-image></el-aside>
     <el-container>
     <el-header style="text-align: left;">
@@ -9,17 +9,22 @@
       <p class="author"> {{ item.writer }}</p>
     </el-header>
     <el-container>
-    <el-header>
-      <p v-if="status === 3" id="detail_percent">阅读至 {{(item.percentage*100).toFixed(2)}}%</p>
-      <p v-else id="detail_percent">{{detail_percent}}</p>
-      <el-button id="turn_detail" size="mini" type='primary' @click="$router.push({name:'BookDetails',params:{isbn:item.isbn}})">详情</el-button>
-    </el-header>
-    </el-container>
-    <el-footer> 
+    <el-header style="height: 24px;">
       <p v-if="status === 2" id="detail_time">加入书架时间 {{item.beginTime}}</p>
       <p v-else-if="status === 3" id="detail_time">最近一次阅读 {{item.lastTime}}</p>
       <p v-else-if="status === 4" id="detail_time">结束阅读时间 {{item.lastTime}}</p>
       <p v-else id="detail_time">{{detail_time}}</p>
+    </el-header>
+    </el-container>
+    <el-footer class="item-footer"> 
+      <p v-if="status === 3" id="detail_percent">阅读至 {{(item.percentage*100).toFixed(2)}}%</p>
+      <p v-else-if="status === 4">
+        <el-rate style="float:left; width:130px; margin-top: 8px;"
+          v-model=item.point disabled  show-score text-color="#ff9900"
+          :colors="colors">
+        </el-rate>
+      </p>
+      <el-button id="turn_detail" size="mini" type='primary' @click="$router.push({name:'BookDetails',params:{isbn:item.isbn}})">详情</el-button>
     </el-footer>
     </el-container>
   </el-container>
@@ -41,6 +46,7 @@
           author:'',
           detail_percent:'',
           detail_time:'',
+          colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
         }
       },
       methods:{
@@ -53,36 +59,34 @@
   margin-top: 10px;
   margin-left: 6%;
   margin-right: 4%;
-  height: 145px;
+  height: 120px;
 }
 
 .image {
-  height: 140px;
-  margin-top: 5px;
-  margin-left: 15%;
+  height: 120px;
+  margin-left: 5%;
   margin-right: 3%;
   display: flex;
   }
-
-.title{  
-  margin-top: 2px;
-}
 
 .author{
   font-size: 14px;
   margin-top: 8px;
 }
 
+
 #detail_time{
-  font-size: 10px;
-  text-align: bottom;
+  font-size: 12px;
+  color: gray;
   float: left;
+  margin-bottom: 10px;
 }
 
 #detail_percent{
-  font-size: 12px;
+  font-size: 13px;
   float: left;
-  color: gray;
+  color: #feb353;
+  margin-top: 8px;
 }
   
 #turn_detail{
@@ -91,5 +95,17 @@
   float:right;
   margin-right: 0px;
   position: relative;
+  margin-top: 2%;
+}
+</style>
+
+<style>
+.el-footer {
+  padding-right:0;
+}
+
+.el-rate__icon {
+  font-size: 19px;
+  margin-right: 2px;
 }
 </style>

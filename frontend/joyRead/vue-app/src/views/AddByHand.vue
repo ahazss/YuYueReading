@@ -1,11 +1,12 @@
 <template>
 <div id="body">
-    <el-container>
-    <el-header style="border-bottom:1px solid #d2d2d2;background-color: #f8a232;">
-    <center><p style="margin-top:4%;color:#ffffff;">填写详情</p></center>
-    </el-header>
-    </el-container>
-    <el-form ref="bookForm" :model="bookForm" label-width="70px">
+    <div class="head-title">
+        <el-card id="item-detail" style="height:44px;">
+            <el-button plain icon="el-icon-arrow-left" class="return" @click="routeTo('WantToRead')">返回</el-button>
+            添加图书
+        </el-card>
+    </div>
+    <el-form ref="bookForm" :model="bookForm" label-width="80px">
         <el-form-item label="书名">
             <el-input v-model="bookForm.name"></el-input>
         </el-form-item>
@@ -21,9 +22,9 @@
         <el-form-item label="页数">
             <el-input v-model="bookForm.page"></el-input>
         </el-form-item>
-        <el-form-item style="margin-bottom:45%;">
+        <el-form-item style="margin-top:15%;">
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button style="margin-left:18%;" @click="$router.back(-1)">取消</el-button>
+            <el-button style="margin-left:10%;" @click="$router.back(-1)">取消</el-button>
         </el-form-item>
     </el-form>
     <FooterBar></FooterBar>
@@ -67,15 +68,33 @@ export default {
             })
             this.$router.go(-1)
         },
-        goBack() {
-        this.$router.go(-1);
-        console.log('go back');
+        routeTo(name, params) {
+           this.$router.push({name, params});
         },
     }
 };
 </script>
 
 <style lang="scss" scoped>
+#item-detail{
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    border-top:0;
+    border-left: 0;
+    border-right:0;
+    padding: 0;
+    font-size: 18px;
+}
+
+.return {
+    padding:0;
+    background: rgba(0,0,0,0);
+    margin-right: 25%;
+    margin-top: 6px;
+    width: 15%;
+    height: 5%;
+    border: 0px;
+}
+
 .el-form{
     margin-top: 8%;
 }
@@ -85,9 +104,11 @@ export default {
     width: 80%;
 }
 #body{
-    background: url('../assets/img/scan-bg.png');
-    background-repeat:no-repeat;
-    background-position: absolute;;
-    background-size:100% 100%;
+    background: url('../assets/img/listbg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    position: fixed;
 }
 </style>

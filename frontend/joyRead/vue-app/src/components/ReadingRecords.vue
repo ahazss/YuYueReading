@@ -1,6 +1,5 @@
 <template>
-    <el-container style="height:50px;margin-bottom:20px" >
-
+    <el-container style="height:60px;margin-bottom:20px" >
         <el-aside style="width:100px;height:50px" >
             <div class="border_weekday" style="height:20px">
                 {{item.date}}
@@ -45,7 +44,7 @@ export default {
     border: 1px;
     border-style: solid;
     text-align: center;
-    
+    font-size: 15px;
 }
 .border_record{
     border-radius: 0px;
@@ -65,6 +64,7 @@ export default {
     border-top-style: none;
     line-height: 27px;
     text-align: center;
+    font-size: 15px;
 }
 
 

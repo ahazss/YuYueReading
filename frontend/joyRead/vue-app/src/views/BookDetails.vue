@@ -1,42 +1,47 @@
 <template>
 <div>
-    <el-card id="item-detail">图书详情</el-card>
-    <div id="box_book" style="margin-top:5px">
-        <img :src=book_pic style="height:30%;width:30%;margin-left:10px">
+    <div class="head-title">
+        <el-card id="item-detail" style="height:44px;">
+            <el-button plain icon="el-icon-arrow-left" class="return" v-if="status==2" @click="routeTo('WantToRead')">返回</el-button>
+            <el-button plain icon="el-icon-arrow-left" class="return" v-if="status==3" @click="routeTo('Reading')">返回</el-button>
+            <el-button plain icon="el-icon-arrow-left" class="return" v-if="status==4" @click="routeTo('HaveRead')">返回</el-button>
+            图书详情
+        </el-card>
+    </div>
+    <div id="box_book">
+        <img :src=book_pic style="height:30%;width:30%;margin-left:20px">
         <div id="book_info">
             <div id="book_name">{{bookname}} </div>
             <div id="writer_name">{{writer}}</div>
+            <div id="publisher">{{publisher}}</div>
             <div v-if="status==3||status==4" id="box_read_time">
-                <div id="read_time" style="margin-right:10px">上次阅读时间</div> 
-                <div id="number">{{month}}</div>
-                <div id="read_time">月</div>
-                <div id="number">{{date}}</div>
-                <div id="read_time">日</div>
+                <div v-if="status==3">
+                  <div id="read_time" style="margin-right:10px">上次阅读时间</div>
+                </div>
+                <div v-else-if="status==4">
+                  <div id="read_time" style="margin-right:10px">最后阅读时间</div>
+                </div> 
+                <div id="last-date">{{date}}</div>
             </div>
-
-            <el-progress :text-inside="true" :stroke-width="19" :percentage="(percentage*100).toFixed(2)"  style="width:195px;margin-bottom:3px" v-if="status==3"></el-progress>
+            <div v-else style="height:30px;"></div>
+            <el-progress :text-inside="true" :stroke-width="19" :percentage="(percentage*100).toFixed(2)"  style="width:195px;" v-if="status==3"></el-progress>
             <div v-if="status==0||status==1||status==2||status==4" style="margin-bottom:21px"></div>
             
-            <el-button-group v-if="status==2 || status==3">
-                <el-button type="primary" @click="addHaveRead()">阅读完成</el-button>
-                <el-button type="primary" @click="$router.push({name:'AddRecord',params:{isbn:isbn}})">添加记录</el-button>
-            </el-button-group>
-            <el-rate
-                v-model="score"
-                :max="5"
-                :show-score="true"
-                text-color="#ff9900"
-                aria-valuenow="tmp_score"
-                score-template="{value}"
-                :allow-half="true"
-                v-else-if="status==4"
-                style="margin-bottom:1px"
-                >
-            </el-rate>
+            <div v-if="status==2 || status==3" style="margin-top:8px;">
+                <el-button type="primary" plain class="detail-button" @click="addHaveRead()">阅读完成</el-button>
+                <el-button type="primary" class="detail-button" @click="$router.push({name:'AddRecord',params:{isbn:isbn}})">添加记录</el-button>
+            </div>
+            <div v-else-if="status==4">
+              <div style="height:15px; font-size: 13px;">个人评分:</div>
+              <el-rate style="float:left; width:130px; margin-top: 8px;"
+                v-model="score" disabled  show-score text-color="#ff9900"
+                :colors="colors">
+              </el-rate>
+            </div>
             <el-button v-else-if="status==0" @click="routeTo('Login')" type="primary">
                 加入想读
             </el-button>
-            <el-button v-else-if="status==1" @click="addWantToRead()"   type="primary">
+            <el-button v-else-if="status==1" @click="addWantToRead()" type="primary" class="detail-button">
                 加入想读
             </el-button>
         </div>
@@ -70,17 +75,19 @@ export default {
   data () {
     return {
         items:'',
-        user_id:"1",
-        isbn:"",
-        bookname:"你当像鸟飞往你的山",//book name
-        book_pic:"https://img9.doubanio.com/view/subject/l/public/s33492346.jpg",
-        writer:"[美]塔拉·韦斯特弗",//Book writer
-        month:"3",//Last read month
-        date:"5",//Last read date
+        user_id:'',
+        isbn:'',
+        bookname:'',//book name
+        book_pic:'',
+        writer:'',//Book writer
+        publisher:'',
+        month:'',//Last read month
+        date:'',//Last read date
         percentage:0,//Percentage of reading progress
         status:0,//Book status returned by api/books/information/detail
         score:4,//The number of star
-        description:"★ 奇迹！一部新人处女作，上市第一周即登上《纽约时报》畅销榜，至今已累计80周，仍高居Top1，全美销量破百万册，作者因此书被《时代周刊》评为“年度影响力人物”\r\n★ 比尔•盖茨年度荐书 第一名\r\n★ 美国亚马逊年度编辑选书 第一名\r\n★《纽约时报》《华尔街日报》《波士顿环球报》畅销书排行 第一名\r\n★ Goodreads读者票选超越米歇尔《成为》，获年度最佳图书\r\n★《洛杉矶时报》最佳传记奖\r\n★《纽约时报》《卫报》《华盛顿邮报》《泰晤士报》《星期日泰晤士报》《经济学人》《奥普拉杂志》、美国国家公共广播电台等二十多家权威媒体 年度图书\r\n一个惊人的故事，真正鼓舞人心。我在阅读她极端的童年故事时，也开始反思起自己的生活。《你当像鸟飞往你的山》每个人都会喜欢。它甚至比你听说的还要好。\r\n——比尔•盖茨\r\n教育意味着获得不同的视角，理解不同的人、经历和历史。接受教育，但不要让你的教育僵化成傲慢。教育应该是思想的拓展，同理心的深化，视野的开阔。它不应该使你的偏见变得更顽固。如果人们受过教育，他们应该变得不那么确定，而不是更确定。他们应该多听，少说，对差异满怀激情，热爱那些不同于他们的想法。\r\n——塔拉•韦斯特弗，《福布斯杂志》访谈\r\n你可以用很多说法来称呼这个全新的自我：转变，蜕变，虚伪，背叛。而我称之为：教育。\r\n——塔拉•韦斯特弗\r\n------------------------------------------------------------------\r\n★作者亲定中文版书名《你当像鸟飞往你的山》\r\n人们只看到我的与众不同：一个十七岁前从未踏入教室的大山女孩，却戴上一顶学历的高帽，熠熠生辉。\r\n只有我知道自己的真面目：我来自一个极少有人能想象的家庭。我的童年由垃圾场的废铜烂铁铸成，那里没有读书声，只有起重机的轰鸣。不上学，不就医，是父亲要我们坚持的忠诚与真理。父亲不允许我们拥有自己的声音，我们的意志是他眼中的恶魔。\r\n哈佛大学，剑桥大学，哲学硕士，历史博士……我知道，像我这样从垃圾堆里爬出来的无知女孩，能取得如今的成就，应当感激涕零才对。但我丝毫提不起热情。\r\n我曾怯懦、崩溃、自我怀疑，内心里有什么东西腐烂了，恶臭熏天。\r\n直到我逃离大山，打开另一个世界。\r\n那是教育给我的新世界，那是我生命的无限可能。"
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+        description:''
     };
   },
   computed:{
@@ -90,6 +97,9 @@ export default {
     routeTo(name, params) {
         this.$router.push({name, params});
     },
+    goBack() {
+        this.$router.go(-1)
+    },
     getBookDetails(){
         var self=this;
         this.$axios.get('/books/information/detail?id='+this.user_id+'&isbn='+this.isbn)
@@ -98,9 +108,12 @@ export default {
             self.bookname=response.data.name;
             self.book_pic=response.data.pic;
             self.writer=response.data.writer;
+            self.publisher = response.data.publisher;
             self.description=response.data.introduction;
             self.percentage=response.data.percentage;
             self.status=response.data.status;
+            self.score = response.data.point;
+            self.date = response.data.lastTime;
         })
         
     },
@@ -143,16 +156,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.head-title {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
 #item-detail{
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     border-top:0;
     border-left: 0;
     border-right:0;
-    text-align: center;
     padding: 0;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.return {
+    padding:0;
+    background: rgba(0,0,0,0);
+    margin-right: 25%;
+    margin-top: 6px;
+    width: 15%;
+    height: 5%;
+    border: 0px;
 }
 #box_book{
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -164,7 +194,8 @@ export default {
     flex-direction: row;
     align-items: baseline;
     justify-content:center;
-    margin-bottom: 10px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 #book_info{
     display: flex;
@@ -174,28 +205,42 @@ export default {
     margin-left: 20px;
 }
 #book_name{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin-bottom:5px;
     text-align: right;
     font-family:"微软雅黑","宋体";
 }
 #writer_name{
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 500;
-    margin-bottom: 4px;
+    margin-bottom:4px;
+    font-family:"楷体","宋体";
+}
+#publisher {
+    font-size:15px;
+    color:gray;
+    margin-bottom:4px;
     font-family:"楷体","宋体";
 }
 #read_time{
-    font-size:16px;
+    font-size:15px;
     font-weight: 500;
     font-family: "等线","宋体";
 }
-#number{
-    font-size: 17px;
+
+#last-date {
+    font-size: 16px;
     font-weight: 500;
     font-family: 'Times New Roman', Times, serif;
     color: rgb(248, 162, 50);
+}
+
+.detail-button {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 #box_details{
     margin-left: 20px;
@@ -217,5 +262,15 @@ export default {
 <style>
 .el-card__body {
     padding:10px;
+}
+
+.el-progress-bar__outer {
+    height:14px !important;
+}
+
+.el-progress-bar__innerText {
+    font-size:11px;
+    font-weight: 100;
+    margin-bottom: 4px;
 }
 </style>

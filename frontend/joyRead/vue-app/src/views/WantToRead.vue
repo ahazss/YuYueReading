@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wanttoread-box">
     <div id="count-head">—  共 {{items.length}} 本  —</div>
     <div v-for="(item,index) in items" :key="index">
       <BookItem :item=item :status=2></BookItem>
@@ -54,7 +54,15 @@ export default {
 }
 </script>
 
-<style >
+<style>
+.wanttoread-box {
+  background: url('~@/../src/assets/img/listbg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height:100%;
+  width:100%;
+  position: fixed;
+}
 #addbtn{
   bottom: 13%;
   right: 7%;
